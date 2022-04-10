@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: team20.mk.ukim.finki.skit.SKitApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.751 s - in team20.mk.ukim.finki.skit.SKitApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.411 s - in team20.mk.ukim.finki.skit.SKitApplicationTests

@@ -1,0 +1,10 @@
+team20\mk\ukim\finki\skit\model\Category.class
+team20\mk\ukim\finki\skit\model\Item.class
+team20\mk\ukim\finki\skit\SKitApplication.class
+team20\mk\ukim\finki\skit\model\User.class
+team20\mk\ukim\finki\skit\model\enumerations\ShoppingCartStatus.class
+team20\mk\ukim\finki\skit\model\Order.class
+team20\mk\ukim\finki\skit\model\ShoppingCart.class
+team20\mk\ukim\finki\skit\model\enumerations\Role.class
+team20\mk\ukim\finki\skit\model\Subject.class
+team20\mk\ukim\finki\skit\model\Keyword.class

@@ -4,6 +4,7 @@ package team20.mk.ukim.finki.skit.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,8 +23,6 @@ public class Item {
     @ManyToOne
     private Category category;
 
-    @ManyToMany
-    private List<Keyword> keywords;
 
     @ManyToOne
     private User soldByUser;
@@ -37,5 +36,20 @@ public class Item {
     @ManyToMany
     private List<Order> ordersForItem;
 
+    public Item(Long id, String name, Double price, Integer quantity, Subject subject, Category category, User soldByUser) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.subject = subject;
+        this.category = category;
 
+        this.soldByUser = soldByUser;
+
+        this.boughtByUsers=new ArrayList<>();
+        this.carts=new ArrayList<>();
+        this.ordersForItem=new ArrayList<>();
+    }
+
+    public Item(){}
 }

@@ -1,4 +1,4 @@
 package team20.mk.ukim.finki.skit.service;
 
-public interface CategroyService {
+public interface CategoryService {
 }

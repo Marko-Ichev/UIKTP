@@ -1,9 +1,31 @@
 package team20.mk.ukim.finki.skit.service.Impl;
 
 import org.springframework.stereotype.Service;
+import team20.mk.ukim.finki.skit.model.Category;
+import team20.mk.ukim.finki.skit.model.Item;
+import team20.mk.ukim.finki.skit.model.exceptions.CategoryNotFoundException;
+import team20.mk.ukim.finki.skit.repository.CategoryRepository;
 import team20.mk.ukim.finki.skit.service.CategoryService;
+
+import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+    private final CategoryRepository categoryRepository;
+
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
+    @Override
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<Item> getAllItemsForCategory(Long id) {
+        Category category=categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
+        return category.getAllItems();
+    }
 }

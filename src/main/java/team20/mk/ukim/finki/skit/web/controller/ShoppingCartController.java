@@ -33,6 +33,7 @@ public class ShoppingCartController {
         String username = req.getRemoteUser();
         ShoppingCart shoppingCart = this.shoppingCartService.getActiveShoppingCart(username);
         model.addAttribute("products", this.shoppingCartService.listAllProductsInShoppingCart(shoppingCart.getId()));
+        model.addAttribute("cart", shoppingCart.getId());
         model.addAttribute("bodyContent", "shopping-cart");
         return "master-template";
     }
@@ -46,6 +47,12 @@ public class ShoppingCartController {
         } catch (RuntimeException exception) {
             return "redirect:/shopping-cart?error=" + exception.getMessage();
         }
+    }
+
+    @DeleteMapping("/delete/{cartId}/{prodId}")
+    public String deleteProduct(@PathVariable Long cartId, @PathVariable Long prodId) {
+        this.shoppingCartService.deleteProductFromShoppingCart(cartId,prodId);
+        return "redirect:/shopping-cart";
     }
 
 }

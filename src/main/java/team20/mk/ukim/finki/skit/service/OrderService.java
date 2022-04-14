@@ -11,4 +11,5 @@ public interface OrderService {
     Order createOrder(ShoppingCart shoppingCart);
 
     List<Order> getOrdersForUser(String username);
+    List<Order> getAllOrders();
 }

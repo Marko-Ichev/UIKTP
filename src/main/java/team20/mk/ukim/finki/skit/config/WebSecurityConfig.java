@@ -23,24 +23,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/h2/**").permitAll();
-
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/home", "/assets/**", "/register","/api/**").permitAll()
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .failureUrl("/login?error=BadCredentials")
+                .defaultSuccessUrl("/items", true)
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/login")
+                .and()
+                .exceptionHandling().accessDeniedPage("/access_denied");
 
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-       /* auth.inMemoryAuthentication()
-                .withUser("kostadin.mishev")
-                .password(passwordEncoder.encode("km"))
-                .authorities("ROLE_USER")
-                .and()
-                .withUser("admin")
-                .password(passwordEncoder.encode("admin"))
-                .authorities("ROLE_ADMIN");*/
+
 
         auth.authenticationProvider(customUsernamePasswordAuthenticationProvider);
     }

@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import team20.mk.ukim.finki.skit.model.Category;
 import team20.mk.ukim.finki.skit.model.Item;
 import team20.mk.ukim.finki.skit.model.Subject;
+import team20.mk.ukim.finki.skit.model.User;
 import team20.mk.ukim.finki.skit.service.CategoryService;
 import team20.mk.ukim.finki.skit.service.ItemService;
 import team20.mk.ukim.finki.skit.service.SubjectService;
+import team20.mk.ukim.finki.skit.service.UserService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -22,11 +25,13 @@ public class ItemController {
     private final ItemService productService;
     private final CategoryService categoryService;
     private final SubjectService subjectService;
+    private final UserService userService;
 
-    public ItemController(ItemService productService, CategoryService categoryService, SubjectService subjectService) {
+    public ItemController(ItemService productService, CategoryService categoryService, SubjectService subjectService, UserService userService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.subjectService = subjectService;
+        this.userService = userService;
     }
 
 
@@ -45,7 +50,7 @@ public class ItemController {
     @DeleteMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         this.productService.deleteById(id);
-        return "redirect:/products";
+        return "redirect:/items/getItemsForUser";
     }
 
     @GetMapping("/edit-form/{id}")
@@ -53,39 +58,44 @@ public class ItemController {
         if (this.productService.findById(id).isPresent()) {
             Item product = this.productService.findById(id).get();
             List<Subject> subjects = this.subjectService.getAllSubjects();
+            List<Category> categories=this.categoryService.getAllCategories();
+            model.addAttribute("categories", categories);
             model.addAttribute("subjects", subjects);
             model.addAttribute("product", product);
             model.addAttribute("bodyContent", "add-product");
             return "master-template";
         }
-        return "redirect:/products?error=ProductNotFound";
+        return "redirect:/items?error=ProductNotFound";
     }
 
-    @GetMapping("/add-form")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/add")
     public String addProductPage(Model model) {
         List<Subject> subjects = this.subjectService.getAllSubjects();
         model.addAttribute("subjects", subjects);
-
-
+        List<Category> categories=this.categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
         model.addAttribute("bodyContent", "add-product");
         return "master-template";
     }
 
-//    @PostMapping("/add")
-//    public String saveProduct(
-//            @RequestParam(required = false) Long id,
-//            @RequestParam String name,
-//            @RequestParam Double price,
-//            @RequestParam Integer quantity,
-//            @RequestParam Long category,
-//            @RequestParam Long manufacturer) {
-//        if (id != null) {
-//            this.productService.edit(id, name, price, quantity, category, manufacturer);
-//        } else {
-//            this.productService.save(name, price, quantity, category, manufacturer);
-//        }
-//        return "redirect:/products";
-//    }
+    @GetMapping("/getItemsForUser")
+    public String getItemsForUser(Model model, HttpServletRequest request) {
+        String username = request.getRemoteUser();
+        User user = (User) userService.loadUserByUsername(username);
+        model.addAttribute("products",user.getItemsForSelling());
+        model.addAttribute("bodyContent", "items-from-user");
+        return "master-template";
+    }
+
+    @PostMapping("/add")
+    public String saveProduct(@RequestParam String name,
+                              @RequestParam(required = false) Long prodId,
+                              @RequestParam Double price,
+                              @RequestParam Integer quantity,
+                              @RequestParam Long category,
+                              @RequestParam Long subject, HttpServletRequest request){
+        productService.save(name,prodId,price,quantity,category,subject,request.getRemoteUser());
+        return "redirect:/items/getItemsForUser";
+    }
 
 }

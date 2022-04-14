@@ -36,19 +36,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "soldByUser")
     private List<Item> itemsForSelling;
 
-    @ManyToMany
-    private List<Item> itemsBought;
-
-
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
 
-   /* public User(String username, String password, String firstName, String lastName) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }*/
 
     public User(String username, String password, String firstName, String lastName, Role role) {
         this.username = username;

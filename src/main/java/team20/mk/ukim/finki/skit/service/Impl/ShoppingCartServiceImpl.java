@@ -12,6 +12,7 @@ import team20.mk.ukim.finki.skit.service.ItemService;
 import team20.mk.ukim.finki.skit.service.ShoppingCartService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -50,6 +51,20 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 
     }
+
+    @Override
+    public ShoppingCart findById(Long id) {
+        return shoppingCartRepository.findById(id).get();
+    }
+
+    @Override
+    public void deleteProductFromShoppingCart(Long cartId, Long prodId) {
+        ShoppingCart cart=this.shoppingCartRepository.findById(cartId).get();
+        List<Item> filtered =cart.getItems().stream().filter(i -> i.getId()!=prodId).collect(Collectors.toList());
+        cart.setItems(filtered);
+        this.shoppingCartRepository.save(cart);
+    }
+
     @Override
     public ShoppingCart addProductToShoppingCart(String username, Long productId) {
         ShoppingCart shoppingCart = this.getActiveShoppingCart(username);

@@ -23,18 +23,12 @@ public class Item {
     @ManyToOne
     private Category category;
 
-
     @ManyToOne
     private User soldByUser;
 
     @ManyToMany
-    private List<User> boughtByUsers;
-
-    @ManyToMany
     private List<ShoppingCart> carts;
 
-    @ManyToMany
-    private List<Order> ordersForItem;
 
     public Item(Long id, String name, Double price, Integer quantity, Subject subject, Category category, User soldByUser) {
         this.id = id;
@@ -45,10 +39,7 @@ public class Item {
         this.category = category;
 
         this.soldByUser = soldByUser;
-
-        this.boughtByUsers=new ArrayList<>();
         this.carts=new ArrayList<>();
-        this.ordersForItem=new ArrayList<>();
     }
 
     public Item(){}

@@ -17,7 +17,6 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRepository productRepository;
     private final SubjectRepository subjectRepository;
     private final CategoryRepository categoryRepository;
-    private final KeywordRepository keywordRepository;
     private final UserRepository userRepository;
     private final ShoppingCartRepository shoppingCartRepository;
 
@@ -25,13 +24,11 @@ public class ItemServiceImpl implements ItemService {
 
     public ItemServiceImpl(ItemRepository itemRepository,
                            SubjectRepository subjectRepository,
-                           CategoryRepository categoryRepository, KeywordRepository keywordRepository, UserRepository userRepository, ShoppingCartRepository shoppingCartRepository) {
+                           CategoryRepository categoryRepository, UserRepository userRepository, ShoppingCartRepository shoppingCartRepository) {
         this.productRepository = itemRepository;
         this.subjectRepository=subjectRepository;
 
         this.categoryRepository = categoryRepository;
-        this.keywordRepository = keywordRepository;
-
         this.userRepository = userRepository;
         this.shoppingCartRepository = shoppingCartRepository;
     }

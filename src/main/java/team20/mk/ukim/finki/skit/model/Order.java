@@ -2,6 +2,7 @@ package team20.mk.ukim.finki.skit.model;
 
 
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
 
 import javax.persistence.*;
 import java.util.List;

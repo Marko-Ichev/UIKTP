@@ -14,5 +14,9 @@ public interface ItemService {
 
     void deleteById(Long id);
 
+    List<Item> getSubmittedItems();
+
+    void approveItem(Long id);
+
 
 }

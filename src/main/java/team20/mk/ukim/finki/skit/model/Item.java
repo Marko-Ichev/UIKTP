@@ -29,6 +29,8 @@ public class Item {
     @ManyToMany
     private List<ShoppingCart> carts;
 
+    private boolean isApproved;
+
 
     public Item(Long id, String name, Double price, Integer quantity, Subject subject, Category category, User soldByUser) {
         this.id = id;
@@ -40,6 +42,7 @@ public class Item {
 
         this.soldByUser = soldByUser;
         this.carts=new ArrayList<>();
+        this.isApproved=false;
     }
 
     public Item(){}

@@ -7,6 +7,7 @@ import team20.mk.ukim.finki.skit.repository.SubjectRepository;
 import team20.mk.ukim.finki.skit.service.SubjectService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
@@ -15,11 +16,19 @@ public class SubjectServiceImpl implements SubjectService {
     private final SubjectRepository subjectRepository;
 
     public SubjectServiceImpl(SubjectRepository subjectRepository) {
+
+
         this.subjectRepository = subjectRepository;
     }
 
     @Override
     public List<Subject> getAllSubjects() {
+        List<Subject> all=this.subjectRepository.findAll();
+        for(Subject s: all){
+            List<Item> approved=s.getAllItems().stream().filter(e -> e.isApproved()).collect(Collectors.toList());
+            s.setAllItems(approved);
+        }
+
         return this.subjectRepository.findAll();
     }
 
@@ -28,6 +37,6 @@ public class SubjectServiceImpl implements SubjectService {
 
         Subject toFind=this.subjectRepository.findById(id).get();
 
-        return toFind.getAllItems();
+        return toFind.getAllItems().stream().filter(e -> e.isApproved()).collect(Collectors.toList());
     }
 }

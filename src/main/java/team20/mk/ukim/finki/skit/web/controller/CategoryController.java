@@ -11,6 +11,7 @@ import team20.mk.ukim.finki.skit.model.Item;
 import team20.mk.ukim.finki.skit.service.CategoryService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/categories")

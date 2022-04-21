@@ -58,7 +58,7 @@ public class ItemController {
         if (this.productService.findById(id).isPresent()) {
             Item product = this.productService.findById(id).get();
             List<Subject> subjects = this.subjectService.getAllSubjects();
-            List<Category> categories=this.categoryService.getAllCategories();
+            List<Category> categories = this.categoryService.getAllCategories();
             model.addAttribute("categories", categories);
             model.addAttribute("subjects", subjects);
             model.addAttribute("product", product);
@@ -72,7 +72,7 @@ public class ItemController {
     public String addProductPage(Model model) {
         List<Subject> subjects = this.subjectService.getAllSubjects();
         model.addAttribute("subjects", subjects);
-        List<Category> categories=this.categoryService.getAllCategories();
+        List<Category> categories = this.categoryService.getAllCategories();
         model.addAttribute("categories", categories);
         model.addAttribute("bodyContent", "add-product");
         return "master-template";
@@ -82,7 +82,7 @@ public class ItemController {
     public String getItemsForUser(Model model, HttpServletRequest request) {
         String username = request.getRemoteUser();
         User user = (User) userService.loadUserByUsername(username);
-        model.addAttribute("products",user.getItemsForSelling());
+        model.addAttribute("products", user.getItemsForSelling());
         model.addAttribute("bodyContent", "items-from-user");
         return "master-template";
     }
@@ -93,9 +93,24 @@ public class ItemController {
                               @RequestParam Double price,
                               @RequestParam Integer quantity,
                               @RequestParam Long category,
-                              @RequestParam Long subject, HttpServletRequest request){
-        productService.save(name,prodId,price,quantity,category,subject,request.getRemoteUser());
+                              @RequestParam Long subject, HttpServletRequest request) {
+        productService.save(name, prodId, price, quantity, category, subject, request.getRemoteUser());
         return "redirect:/items/getItemsForUser";
     }
 
+    @GetMapping("/getSubmittedItems")
+    public String getSubmittedItems(Model model) {
+        List<Item> submitted = productService.getSubmittedItems();
+        model.addAttribute("products", submitted);
+        model.addAttribute("bodyContent", "submitted-items");
+        return "master-template";
+    }
+
+
+    @GetMapping("/approve/{id}")
+    public String approve(@PathVariable Long id, Model model) {
+        productService.approveItem(id);
+        model.addAttribute("bodyContent", "submitted-items");
+        return "redirect:/items/getSubmittedItems";
+    }
 }

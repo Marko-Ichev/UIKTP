@@ -23,6 +23,11 @@
                             <a class="nav-link active text-danger" href="/order/allOrders">All orders</a>
                         </li>
                     </th:block>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li class="nav-item m-auto">
+                            <a class="nav-link active text-danger" href="/items/getSubmittedItems">Submitted items</a>
+                        </li>
+                    </th:block>
 
                 </ul>
 

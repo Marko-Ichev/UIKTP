@@ -8,6 +8,7 @@ import team20.mk.ukim.finki.skit.repository.CategoryRepository;
 import team20.mk.ukim.finki.skit.service.CategoryService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -20,12 +21,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
+
+        List<Category> allCategories=categoryRepository.findAll();
+        for(Category c: allCategories){
+            List<Item> approved=c.getAllItems().stream().filter(e -> e.isApproved()).collect(Collectors.toList());
+            c.setAllItems(approved);
+        }
+        return allCategories;
     }
 
     @Override
     public List<Item> getAllItemsForCategory(Long id) {
         Category category=categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
-        return category.getAllItems();
+        return category.getAllItems().stream().filter(e -> e.isApproved()).collect(Collectors.toList());
     }
 }

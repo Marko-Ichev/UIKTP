@@ -37,7 +37,8 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> findAll() {
-        return this.productRepository.findAll();
+        List<Item> all=this.productRepository.findAll();
+        return all.stream().filter(e -> e.isApproved()).collect(Collectors.toList());
     }
 
     @Override
@@ -87,5 +88,17 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public void deleteById(Long id) {
         this.productRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Item> getSubmittedItems() {
+        return productRepository.findAll().stream().filter(e -> !e.isApproved()).collect(Collectors.toList());
+    }
+
+    @Override
+    public void approveItem(Long id) {
+        Item item=productRepository.findById(id).get();
+        item.setApproved(true);
+        productRepository.save(item);
     }
 }

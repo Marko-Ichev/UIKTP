@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<style>
+
+    .form-signin mt-xl-5
+    {
+        padding: 5%;
+        border: 1px solid #ced4da;
+        margin-bottom: 2%;
+    }
+    .form-control{
+        border-radius:1.5rem;
+        width: 30%;
+    }
+    .btn
+    {
+        border:none;
+        border-radius:1.5rem;
+        padding: 0.5%;
+        width: 25%;
+        cursor: pointer;
+        background: #8491a5;
+        color: #fff;
+    }
+</style>
 <div class="container">
     <form class="form-signin mt-xl-5" method="post" action="/login">
         <h2 class="form-signin-heading">Sign in</h2>
@@ -19,8 +45,10 @@
 
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
+
     <a href="/register" class="btn btn-block btn-light">Register here</a>
+    </form>
+
 </div>
 </body>
 </html>

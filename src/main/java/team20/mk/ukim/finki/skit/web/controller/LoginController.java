@@ -9,7 +9,7 @@ import team20.mk.ukim.finki.skit.model.User;
 import team20.mk.ukim.finki.skit.model.exceptions.InvalidUserCredentialsException;
 import team20.mk.ukim.finki.skit.service.AuthService;
 
-import javax.servlet.http.HttpServletRequest;
+    import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/login")

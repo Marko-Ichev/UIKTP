@@ -20,13 +20,11 @@ public class ItemServiceImpl implements ItemService {
     private final UserRepository userRepository;
     private final ShoppingCartRepository shoppingCartRepository;
 
-
-
     public ItemServiceImpl(ItemRepository itemRepository,
                            SubjectRepository subjectRepository,
                            CategoryRepository categoryRepository, UserRepository userRepository, ShoppingCartRepository shoppingCartRepository) {
         this.productRepository = itemRepository;
-        this.subjectRepository=subjectRepository;
+        this.subjectRepository = subjectRepository;
 
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
@@ -34,10 +32,9 @@ public class ItemServiceImpl implements ItemService {
     }
 
 
-
     @Override
     public List<Item> findAll() {
-        List<Item> all=this.productRepository.findAll();
+        List<Item> all = this.productRepository.findAll();
         return all.stream().filter(e -> e.isApproved()).collect(Collectors.toList());
     }
 
@@ -57,9 +54,9 @@ public class ItemServiceImpl implements ItemService {
         Category category = this.categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException());
 
-        Subject subject=this.subjectRepository.findById(subjectId).get();
+        Subject subject = this.subjectRepository.findById(subjectId).get();
 
-        User soldBy=this.userRepository.findByUsername(username).get();
+        User soldBy = this.userRepository.findByUsername(username).get();
 
         Item toReturn;
         if (prodId != null && productRepository.findById(prodId).isPresent()) {
@@ -75,14 +72,10 @@ public class ItemServiceImpl implements ItemService {
             return Optional.of(toReturn);
         } else {
             toReturn = productRepository.save(
-                    new Item(prodId,name, price, quantity, subject, category,soldBy));
-
+                    new Item(prodId, name, price, quantity, subject, category, soldBy));
             return Optional.of(toReturn);
         }
-
-
     }
-
 
 
     @Override
@@ -97,7 +90,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void approveItem(Long id) {
-        Item item=productRepository.findById(id).get();
+        Item item = productRepository.findById(id).get();
         item.setApproved(true);
         productRepository.save(item);
     }

@@ -1,6 +1,5 @@
 package team20.mk.ukim.finki.skit.service.Impl;
 
-
 import org.springframework.stereotype.Service;
 import team20.mk.ukim.finki.skit.model.Item;
 import team20.mk.ukim.finki.skit.model.ShoppingCart;
@@ -17,8 +16,6 @@ import java.util.stream.Collectors;
 @Service
 
 public class ShoppingCartServiceImpl implements ShoppingCartService {
-
-
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserRepository userRepository;
     private final ItemService productService;
@@ -48,8 +45,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                     ShoppingCart shoppingCart = new ShoppingCart(user);
                     return this.shoppingCartRepository.save(shoppingCart);
                 });
-
-
     }
 
     @Override

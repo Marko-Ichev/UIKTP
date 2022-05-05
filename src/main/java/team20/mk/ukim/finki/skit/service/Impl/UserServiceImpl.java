@@ -11,7 +11,6 @@ import team20.mk.ukim.finki.skit.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 

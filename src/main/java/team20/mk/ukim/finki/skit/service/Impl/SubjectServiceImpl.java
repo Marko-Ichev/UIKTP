@@ -7,18 +7,24 @@ import team20.mk.ukim.finki.skit.repository.SubjectRepository;
 import team20.mk.ukim.finki.skit.service.SubjectService;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {
-
-
     private final SubjectRepository subjectRepository;
 
     public SubjectServiceImpl(SubjectRepository subjectRepository) {
 
 
         this.subjectRepository = subjectRepository;
+    }
+
+    @Override
+    public Optional<Subject> save(String name) {
+        return Optional.of(this.subjectRepository.save(new Subject(name)));
+
+
     }
 
     @Override

@@ -14,10 +14,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping>
-          <factory-entry name="S-KIT" />
-          <factory-entry name="entityManagerFactory" />
-        </datasource-mapping>
+        <datasource-mapping />
         <naming-strategy-map />
       </configuration>
     </facet>
@@ -32,14 +29,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:2.6.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.6.6" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.6.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.6.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.6.6" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.2.11" level="project" />
@@ -52,7 +47,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:5.3.18" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:5.3.18" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.6.2" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.18" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.3.18" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-thymeleaf:2.6.6" level="project" />
@@ -182,11 +176,9 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.security:spring-security-test:5.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-crypto:5.6.2" level="project" />
-<<<<<<< HEAD
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.1" level="project" />
-=======
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.13.2" level="project" />
->>>>>>> db8cfec78d2852933cd1131e87227cd904056420
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot:2.6.6" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.3.18" level="project" />
   </component>
 </module>

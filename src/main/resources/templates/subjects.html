@@ -22,10 +22,13 @@
     {
         background-color: #eae8e8;
     }
-    .btn{
-        margin-right: -159px;
+    #button2{
+        margin-right: -120px;
     }
 </style>
+<div class="container">
+    <h3 class="jumbotron-heading">All subjects in system</h3>
+</div>
 <div class="container mb-4">
     <div class="row">
         <div class="col-12" th:if="${subjects.size() > 0}">
@@ -43,7 +46,7 @@
                     <tr th:each="cat : ${subjects}" class="product">
                         <td th:text="${cat.getName()}"></td>
                         <td th:text="${cat.getAllItems().size()}"></td>
-                        <td><a class="btn btn-secondary" th:href="@{'/subjects/{cat}' (cat=${cat.getId()})}">View all items for subject</a> </td>
+                        <td><a id=button2 class="btn btn-secondary" th:href="@{'/subjects/{cat}' (cat=${cat.getId()})}">View all items for subject</a> </td>
 
                     </tr>
                     </tbody>

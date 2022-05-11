@@ -2,29 +2,31 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
-
-    body {
-        font-family: 'Manrope', sans-serif;
-        background: #eee
+    @media (min-width: 1025px) {
+        .h-custom {
+            height: 100vh !important;
+        }
     }
 
-    .size span {
-        font-size: 11px
+    .product {
+        font-size: 1rem;
+        line-height: 2.15;
+        padding-left: .75em;
+        padding-right: .75em;
     }
 
-    .color span {
-        font-size: 11px
+    .card-registration .select-arrow {
+        top: 13px;
     }
 
-    .qty i {
-        font-size: 11px
+    {
+        background-color: #eae8e8;
     }
-    .btn
+    #button2
     {
 
         color: #ffffff;
-        margin-right: -159px;
+        margin-right: -161px;
     }
 
 </style>
@@ -39,13 +41,14 @@
                         <th scope="col">Name</th>
                         <th scope="col"># of items in category</th>
                         <th scope="col"></th>
+
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="cat : ${categories}" class="product">
                         <td th:text="${cat.getName()}"></td>
                         <td th:text="${cat.getAllItems().size()}"></td>
-                        <td><a class="btn  btn-primary" th:href="@{'/categories/{cat}' (cat=${cat.getId()})}">View all items in category</a> </td>
+                        <td><a id=button2 class="btn  btn-primary" th:href="@{'/categories/{cat}' (cat=${cat.getId()})}">View all items in category</a> </td>
 
                     </tr>
                     </tbody>
